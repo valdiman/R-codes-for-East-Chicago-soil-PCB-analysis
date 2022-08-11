@@ -37,7 +37,7 @@ library(tidyverse) # data manipulation
 # 2017/2018. PANGAEA, https://doi.pangaea.de/10.1594/PANGAEA.941894
 
 # Set cache path to the project folder
-pg_cache$cache_path_set(full_path = "/Users/andres/OneDrive - University of Iowa/work/ISRP/Project6/Soil/R/ECSS")
+pg_cache$cache_path_set(full_path = "/XXX")
 
 # Download original datasets from Pangaea
 s.0 <- pg_data(doi = '10.1594/PANGAEA.941881') # soil dataset
