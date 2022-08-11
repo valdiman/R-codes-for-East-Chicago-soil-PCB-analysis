@@ -7,7 +7,6 @@ install.packages("userfriendlyscience")
 install.packages("reshape2")
 install.packages("ggfortify")
 install.packages("tidyverse")
-install.packages('ggplot')
 
 # Library
 library(pangaear) # Read data from Pangaea
@@ -27,7 +26,7 @@ library(tidyverse) # data manipulation
 # 2017/2018. PANGAEA, https://doi.pangaea.de/10.1594/PANGAEA.941894
 
 # Set cache path to the project folder
-pg_cache$cache_path_set(full_path = "/Users/andres/OneDrive - University of Iowa/work/ISRP/Project6/Soil/R/ECSS")
+pg_cache$cache_path_set(full_path = "/XXX")
 
 # Download original datasets from Pangaea
 s.0 <- pg_data(doi = '10.1594/PANGAEA.941881') # soil dataset
@@ -117,6 +116,7 @@ tPCB <- rowSums(s.3)
 tPCB <- data.frame(tPCB)
 
 # Anova -------------------------------------------------------------------
+
 # For total PCB EC and other locations
 # Create matrix to storage external data
 s.Anova <- matrix(NA, nrow = 6, ncol = 73)
@@ -235,6 +235,7 @@ Anova.tPCB <- aov(log10(value) ~ location, data = s.Anova2)
 summary(Anova.tPCB)
 
 # Tukey test (multiple pairwise comparison) -------------------------------
+
 # Using s.Anova2 
 # Need to remove NA
 s.Anova2.NA <- na.omit(s.Anova2)
@@ -251,6 +252,7 @@ mcp <- data.frame(tgh$intermediate$posthocTGH$intermediate$pairNames,
 mcp.2 <- subset(mcp, tgh$intermediate$posthocTGH$output$games.howell$p < 0.05)
 
 # TOC vs PCBs regressions ------------------------------------------------
+
 # Include TOC data to s.3
 s.toc <- cbind(toc$TOC...., s.3)
 # Remove samples (row) where toc was not measured (NA)
@@ -286,6 +288,7 @@ colnames(TOC.matrix) <- c("slope", "R2", "p-value")
 rownames(TOC.matrix) <- names(s.3)
 
 # Distance to The Fork (IHSC) vs PCBs regressions --------------------------
+
 # Change name to distance in s
 colnames(s)[8] <- "distanceFork"
 dist <- s$distanceFork # m
@@ -312,6 +315,7 @@ colnames(dist.matrix) <- c("slope", "R2", "p-value")
 rownames(dist.matrix) <- names(s.3)
 
 # Multiple linear regression (MLR) ----------------------------------------------
+
 # TOC, distance
 s.mlr <- cbind(s$distanceFork, toc$TOC...., s.3)
 # Change distance and toc names
@@ -353,6 +357,7 @@ colnames(mlr.matrix) <- c("coef.toc", "coef.dist","p.toc", "p.dist",
 rownames(mlr.matrix) <- names(s.toc.2)
 
 # PCB vs Metals regressions ----------------------------------------------
+
 # Using s
 # Create matrix to storage metal data
 metal.matrix <- matrix(nrow = length(s$Sample.label),
@@ -522,6 +527,7 @@ colnames(metal.matrix.5) <- c("slope", "R2", "p-value")
 rownames(metal.matrix.5) <- names(s.3)
 
 # PCA ---------------------------------------------------------------------
+
 # Create individual PCB congener profiles
 # When dataset ready in Pangaea, only 75% detection needs to be used here
 # e.g., s.3 <- s.2[, colMeans(s.2>0) >= 0.75]
@@ -1160,6 +1166,7 @@ PCA.2 <- prcomp(prof.2)
 summary(PCA.2)
 
 # Cosine Theta Analysis ---------------------------------------------------
+
 # First, using average PCB congener profile
 # Data from section PCA
 prof.ave <- data.frame(colMeans(prof))
