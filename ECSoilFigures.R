@@ -590,7 +590,6 @@ ggplot(s.tpcb, aes(x = location, y = value)) +
                size = 0.8, color = "blue")
 
 # Individual PCB boxplot (Figure 4) ---------------------------------------
-# need to change the column names!
 
 ggplot(stack(s.3), aes(x = ind, y = values)) +
   scale_y_log10(limits = c(0.005, 300),
